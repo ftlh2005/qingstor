@@ -7,7 +7,7 @@ Laravel QingStor 文件上传系统，基于<a href="https://github.com/yunify/q
 ## 安装
 - Composer 安装
     ```
-    composer require gexingw/laravel-qingstor-storage
+    composer require cdxmj/laravel-qingstor-storage
     ```
 - 下载安装，下载解压缩即可
 
