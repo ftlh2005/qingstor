@@ -6,12 +6,13 @@ namespace CdXmj\QingStorStorage;
 
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
-class QingStorProvider extends ServiceProvider
+class QingStorServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        \Storage::extend('QingStor', function ($app, $config) {
+        Storage::extend('QingStor', function ($app, $config) {
             $client = QingStorClient::getInstance($config);
 
             $bucket = array_get($config, 'bucket');

@@ -26,7 +26,7 @@
         "laravel":
         {
             "providers": [
-                "CdXmj\\QingStorProvider"
+                "CdXmj\\QingStorStorage\\UpyunServiceProvider"
             ]
         }
     }
