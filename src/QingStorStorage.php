@@ -327,7 +327,7 @@ class QingStorStorage extends AbstractAdapter
     }
 
     /**
-     * Get all the meta data of a file or directory.
+     * 获取文件或目录的所有元数据。
      *
      * @param string $path
      *
