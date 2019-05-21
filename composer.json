@@ -1,22 +1,33 @@
 {
-  "name": "cdxmj/laravel-qingstor-storage",
-  "authors": [
+    "name": "cdxmj/laravel-qingstor-storage",
+    "authors": [
     {
-      "name": "lp",
-      "email": "ftlh2005@gmail.com"
+        "name": "lp",
+        "email": "ftlh2005@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require":
+    {
+        "php": ">=5.5.9",
+        "yunify/qingstor-sdk": "^2.2.4",
+        "league/flysystem": "^1.0"
+    },
+    "type": "library",
+    "license": "MIT",
+    "autoload":
+    {
+        "psr-4":
+        {
+            "CdXmj\\QingStorStorage\\": "./src/"
+        }
+    },
+    "extra":
+    {
+        "laravel":
+        {
+            "providers": [
+                "CdXmj\\QingStorProvider"
+            ]
+        }
     }
-  ],
-  "minimum-stability": "dev",
-  "require": {
-    "php": ">=5.5.9",
-    "yunify/qingstor-sdk": "^2.2.4",
-    "league/flysystem": "^1.0"
-  },
-  "type": "library",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "CdXmj\\QingStorStorage\\": "./src/"
-    }
-  }
 }
