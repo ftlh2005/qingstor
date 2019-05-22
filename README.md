@@ -23,6 +23,8 @@ Laravel QingStor 文件上传系统，基于<a href="https://github.com/yunify/q
                 'zone' => 'My Zone',
                 'access_key_id' => 'Access ID', // 青云App Key
                 'secret_access_key' => 'Access Secret', //青云App Secret
+                'domain'    => 'src.xxx.com',
+                'protocol'  => 'http', // 服务使用的协议，如需使用 http，在此配置 http
             ],
     ```
 

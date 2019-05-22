@@ -17,8 +17,10 @@ class QingStorServiceProvider extends ServiceProvider
 
             $bucket = array_get($config, 'bucket');
             $zone = array_get($config, 'zone');
+            $domain = array_get($config, 'domain');
+            $protocol = array_get($config, 'protocol');
 
-            $adapter = new QingStorStorage($client, $bucket, $zone);
+            $adapter = new QingStorStorage($client, $bucket, $zone, $domain, $protocol);
 
             return new Filesystem($adapter);
         });

@@ -17,18 +17,34 @@ class QingStorStorage extends AbstractAdapter
 
     protected $bucket;
 
-    public function __construct(QingstorClient $QingstorClient, $bucket = '', $zone = '')
+    protected $domain;
+
+    protected $protocol;
+
+    /**
+     * This is a cool function
+     * @Author   liaoping
+     * @DateTime 2019-05-21
+     * @param    QingstorClient $QingstorClient [description]
+     * @param    string         $bucket         [description]
+     * @param    string         $zone           [description]
+     */
+    public function __construct(QingstorClient $QingstorClient, $bucket = '', $zone = '', $domain, $protocol = 'http')
     {
         $this->client = $QingstorClient;
         $this->bucketName = $bucket;
         $this->qingstorService = $QingstorClient->service;
+
+        $this->domain = $domain;
+        $this->protocol = $protocol;
+
 
         $this->bucket = $this->qingstorService->Bucket($bucket, $zone);
     }
 
     /**
      * Write a new file.
-     *
+     * 上传一个对象，单个文件
      * @param string $path
      * @param string $contents
      * @param Config $config Config object
@@ -43,6 +59,7 @@ class QingStorStorage extends AbstractAdapter
                 'Content-Type' => Util::guessMimeType($path, $contents),
                 'Content-Length' => Util::contentSize($contents),
             ];
+
             $res = $this->bucket->putObject($path, $options);
 
             return $res->statusCode === 201 ? true : false;
@@ -54,7 +71,7 @@ class QingStorStorage extends AbstractAdapter
 
     /**
      * Write a new file using a stream.
-     *
+     * 使用流写入新文件
      * @param string $path
      * @param resource $resource
      * @param Config $config Config object
@@ -106,7 +123,7 @@ class QingStorStorage extends AbstractAdapter
 
     /**
      * Rename a file.
-     *
+     * 重命名文件名
      * @param string $path
      * @param string $newpath
      *
@@ -386,5 +403,25 @@ class QingStorStorage extends AbstractAdapter
         return $this->read($path);
     }
 
+    /**
+     * @param $path
+     * @return string
+     */
+    public function getUrl($path)
+    {
+        return $this->normalizeHost($this->domain).$path;
+    }
 
+    /**
+     * @param $domain
+     * @return string
+     */
+    protected function normalizeHost($domain)
+    {
+        if (0 !== stripos($domain, 'https://') && 0 !== stripos($domain, 'http://')) {
+            $domain = $this->protocol."://{$domain}";
+        }
+
+        return rtrim($domain, '/').'/';
+    }
 }
